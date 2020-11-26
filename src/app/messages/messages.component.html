@@ -1,0 +1,35 @@
+<div class="page">
+  <div class="container h-100">
+    <div class="row h-100">
+      <div class="col-12 col-lg-9">
+        <mat-card class="messages-card w-100 h-100">
+          <mat-card-header>
+            <mat-form-field class="w-100">
+              <input type="text" matInput placeholder="Search Message" aria-label="Messages" [formControl]="filterInputControl" >
+            </mat-form-field>
+          </mat-card-header>
+
+          <mat-card-content>
+            <cdk-virtual-scroll-viewport class="h-100" itemSize="50">
+              <app-message-item [message]="item" *cdkVirtualFor="let item of messages$ | async; templateCacheSize: 0"></app-message-item>
+            </cdk-virtual-scroll-viewport>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="col-12 col-lg-3 mt-3 mt-lg-0">
+        <mat-card class="messages-card__messages-analytics w-100">
+          <mat-card-content>
+            <p>Avg Number of Tweets: {{(tweetsPerMin$ | async) | number}}</p>
+
+            <section>
+              <p class="mb-0">Country Codes:</p>
+              <p class="pl-5">
+                <span *ngFor="let item of countryCodes$ | async">{{item}}, </span>
+              </p>
+            </section>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
